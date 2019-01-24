@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pix
+A simple TypeScript/React app that renders searched images to the screen
 
 ## Available Scripts
 
