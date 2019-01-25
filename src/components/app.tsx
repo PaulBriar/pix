@@ -2,12 +2,18 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import '../styles/main.css';
 
-const App: React.StatelessComponent<any> = () => {
-    return (
-        <div className="ui container">
-            <SearchBar/>
-        </div>
-    )
-};
+class App extends React.Component<any, any> {
+    onSearchSubmit(term:string) {
+        console.log(term);
+    }
+
+    render() {
+        return (
+            <div className="ui container">
+                <SearchBar onSubmit={this.onSearchSubmit}/>
+            </div>
+        );
+    };
+}
 
 export default App;
