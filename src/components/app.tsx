@@ -2,6 +2,7 @@ import React from 'react';
 import ImageList from './ImageList';
 import SearchBar from './SearchBar';
 import unsplash from '../api/unsplash';
+import UpArrow from './UpArrow';
 import '../styles/main.css';
 
 class App extends React.Component<any, any> {
@@ -22,6 +23,8 @@ class App extends React.Component<any, any> {
             <div className="ui container">
                 <SearchBar onSubmit={this.onSearchSubmit}/>
                 <ImageList images={this.state.images}/>
+                <UpArrow />
+                
             </div>
         );
     };
