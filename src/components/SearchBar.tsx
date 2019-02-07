@@ -8,7 +8,7 @@ class SearchBar extends React.Component<any, any> {
         this.props.onSubmit(this.state.term);        
     };
 
-    componentDidMount = () =>  {
+    componentDidMount = () =>  {        
         this.props.onSubmit('new');        
     };
 

@@ -18,9 +18,7 @@ class App extends React.Component<any, any> {
         this.setState({ images: res.data.results });       
     };
 
-    renderContent = () => {
-        console.log(this.state);
-        
+    renderContent = () => {        
         if (this.state.images === []) {
             return (
                 <div className="ui container">
