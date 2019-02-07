@@ -2,7 +2,7 @@ import React from 'react';
 import ImageList from './ImageList';
 import SearchBar from './SearchBar';
 import unsplash from '../api/unsplash';
-import UpArrow from './UpArrow';
+import Spinner from './Spinner';
 import '../styles/main.css';
 
 class App extends React.Component<any, any> {
@@ -18,15 +18,28 @@ class App extends React.Component<any, any> {
         this.setState({ images: res.data.results });       
     };
 
-    render() {
+    renderContent = () => {
+        console.log(this.state);
+        
+        if (this.state.images === []) {
+            return (
+                <div className="ui container">
+                    <SearchBar onSubmit={this.onSearchSubmit}/>
+                    <Spinner />
+                </div>
+                
+            );
+        }
         return (
             <div className="ui container">
                 <SearchBar onSubmit={this.onSearchSubmit}/>
                 <ImageList images={this.state.images}/>
-                <UpArrow />
-                
             </div>
         );
+    };
+
+    render() {
+        return this.renderContent();
     };
 };
 
