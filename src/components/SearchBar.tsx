@@ -14,12 +14,14 @@ class SearchBar extends React.Component<any, any> {
 
     public render() {
         return (
-            <div className="ui segment">
+            <div className="ui basic segment">
                 <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="field">
                         <input
+                            id="searchBar"
                             type="text"
                             placeholder="Image Search"
+                            autoFocus
                             onChange={e => this.setState({ term: e.target.value})}
                             value={this.state.term}
                         />
