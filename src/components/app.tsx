@@ -3,6 +3,7 @@ import ImageList from './ImageList';
 import SearchBar from './SearchBar';
 import unsplash from '../api/unsplash';
 import Spinner from './Spinner';
+import Navbar from './Navbar';
 import '../styles/main.css';
 
 class App extends React.Component<any, any> {
@@ -21,14 +22,18 @@ class App extends React.Component<any, any> {
         if (this.state.images === []) {
             return (
                 <div className="ui container">
-                    <SearchBar onSubmit={this.onSearchSubmit}/>
+                    <Navbar>
+                        <SearchBar onSubmit={this.onSearchSubmit}/>
+                    </Navbar>
                     <Spinner />
                 </div>
             );
         }
         return (
             <div className="ui container">
-                <SearchBar onSubmit={this.onSearchSubmit}/>
+                <Navbar>
+                    <SearchBar onSubmit={this.onSearchSubmit}/>
+                </Navbar>
                 <ImageList images={this.state.images}/>
             </div>
         );
