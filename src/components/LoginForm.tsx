@@ -58,19 +58,18 @@ class LoginForm extends React.Component {
       <div>
         <div>
           <input
-            label="Email"
+            type="Email"
             value={email}
-            onChangeText={text => this.setState({ email: text })}
+            onChange={text => this.setState({ email: text })}
             placeholder="your@email.com"
           />
         </div>
         <div>
           <input
-            label="Password"
+            type="Password"
             value={password}
-            onChangeText={text => this.setState({ password: text })}
+            onChange={text => this.setState({ password: text })}
             placeholder="password"
-            secureTextEntry
           />
         </div>
         <div>
