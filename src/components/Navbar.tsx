@@ -1,11 +1,36 @@
 import React from 'react';
 import firebase from 'firebase';
-import { BrowserRouter as Route, Link } from 'react-router-dom';
+import Modal from 'react-modal';
 import LoginForm from './LoginForm';
 import Spinner from './Spinner';
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+Modal.setAppElement('#modal');
+
 class Navbar extends React.Component {
-	state = { loggedIn: null };
+	state = { loggedIn: null, modalIsOpen: false };
+
+	openModal = () => {
+		this.setState({ modalIsOpen: true });
+	}
+
+	afterOpenModal = () => {
+		this.subtitle.style.color = '#f00';
+	}
+
+	closeModal = () => {
+		this.setState({ modalIsOpen: false });
+	}
 
 	componentDidMount = () => {
 		firebase.initializeApp({
@@ -22,7 +47,8 @@ class Navbar extends React.Component {
         this.setState({ loggedIn: true });
       } else {
         this.setState({ loggedIn: false });
-      }
+			}
+			console.log(this.state);
     });
 	}
 
@@ -30,9 +56,37 @@ class Navbar extends React.Component {
 			const { loggedIn } = this.state;
 
 			if (loggedIn) {
-				return <span>Log out</span>;
+				return (
+					<a className="ui item" onClick={() => firebase.auth().signOut() }>
+						<span>Log out</span>
+					</a>
+				);
 			} else if (!loggedIn) {
-				return <span>Login</span>;
+				return (
+					<a className="ui item" onClick={this.openModal}>
+						<span>Login</span>
+					</a>
+
+				// 	<Modal
+        //   isOpen={this.state.modalIsOpen}
+        //   onAfterOpen={this.afterOpenModal}
+        //   onRequestClose={this.closeModal}
+        //   style={customStyles}
+        //   contentLabel="Example Modal"
+        // 	>
+
+        //   <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+        //   <button onClick={this.closeModal}>close</button>
+        //   <div>I am a modal</div>
+        //   <form>
+        //     <input />
+        //     <button>tab navigation</button>
+        //     <button>stays</button>
+        //     <button>inside</button>
+        //     <button>the modal</button>
+        //   </form>
+        // </Modal>
+				);
 			} else {
 				return <Spinner size="large" />;
 			}
@@ -41,19 +95,15 @@ class Navbar extends React.Component {
 	render() {
 		return (
 			<div className="ui secondary menu">
-				<a className="item" href="/">pix</a>
-				<div className="right menu">
-					<div className="item">
-						<div className="ui icon input">
-							{this.props.children}
+					<a className="item" href="#">pix</a>
+					<div className="right menu">
+						<div className="item">
+							<div className="ui icon input">
+								{this.props.children}
+							</div>
 						</div>
+							{this.renderLogin()}
 					</div>
-					<Link to="/login" className="ui item" onClick={() => firebase.auth().signOut()}>
-						{this.renderLogin()}
-					</Link>
-				</div>
-
-				<Route path="/login" exact component={LoginForm}/>
 			</div>
 		);
 	}
